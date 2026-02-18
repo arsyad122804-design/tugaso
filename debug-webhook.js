@@ -1,7 +1,7 @@
 // Debug webhook - Check if webhook is receiving data
 // Run this to test webhook verification and simulate incoming messages
 
-const BASE_URL = process.env.WEBHOOK_URL || 'https://kings-interest-aggregate-equipped.trycloudflare.com'
+const BASE_URL = process.env.WEBHOOK_URL || 'https://crm-wa.vercel.app'
 
 console.log('🔍 WhatsApp Webhook Debugger\n')
 console.log('Base URL:', BASE_URL)
@@ -14,6 +14,8 @@ async function testVerification() {
   const verifyToken = 'whatsapp_crm_webhook_secret_2024'
   const challenge = 'test_challenge_12345'
   const url = `${BASE_URL}/api/webhook/whatsapp?hub.mode=subscribe&hub.verify_token=${verifyToken}&hub.challenge=${challenge}`
+
+  console.log(url)
   
   try {
     const response = await fetch(url)
