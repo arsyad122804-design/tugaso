@@ -22,6 +22,7 @@ export async function POST(req: Request) {
     const body = await req.json()
     
     console.log('📥 Webhook received:', JSON.stringify(body, null, 2))
+    console.log('📥 Request headers:', Object.fromEntries(req.headers.entries()))
 
     const entry = body.entry?.[0]
     const changes = entry?.changes?.[0]
