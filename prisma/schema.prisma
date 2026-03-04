@@ -9,15 +9,17 @@ datasource db {
 }
 
 enum Role {
-  ADMIN
-  USER
+  CEO
+  MANAGER
+  SEKRETARIS
+  BENDAHARA
 }
 
 model User {
   id        String   @id @default(uuid()) @db.Uuid
   email     String   @unique
   password  String
-  role      Role     @default(ADMIN)
+  role      Role     @default(MANAGER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

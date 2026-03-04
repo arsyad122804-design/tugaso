@@ -1,0 +1,47 @@
+========================================
+COPY SEMUA ISI FILE INI KE FILE .env ANDA
+========================================
+
+LANGKAH:
+1. Reset password database di Supabase (https://supabase.com/dashboard/project/nekydwvltxrlbmpftbjt/settings/database)
+2. Ganti [PASSWORD_BARU] di bawah dengan password yang baru Anda buat
+3. Dapatkan service_role key dari Settings > API
+4. Ganti [SERVICE_ROLE_KEY] dengan key yang Anda copy
+5. Copy SEMUA text di bawah ini
+6. Paste ke file .env Anda (replace semua isi file .env)
+7. Save file .env
+8. Test: npm run db:test
+
+========================================
+MULAI COPY DARI SINI:
+========================================
+
+DATABASE_URL='postgresql://postgres.nekydwvltxrlbmpftbjt:[PASSWORD_BARU]@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true&prepared_statements=false&connection_limit=5&pool_timeout=10'
+DIRECT_URL='postgresql://postgres.nekydwvltxrlbmpftbjt:[PASSWORD_BARU]@aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres'
+
+NEXT_PUBLIC_SUPABASE_URL='https://nekydwvltxrlbmpftbjt.supabase.co'
+NEXT_PUBLIC_SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5la3lkd3ZsdHhybGJtcGZ0Ymp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNzE4NTEsImV4cCI6MjA4NzY0Nzg1MX0.rnYsUPLtVpGfZUqycVfocdpKuuzWMQp1v9s00AT-5xc'
+SUPABASE_SERVICE_ROLE_KEY='[SERVICE_ROLE_KEY]'
+
+NODE_ENV="development"
+SESSION_SECRET="my-super-secret-key-change-this-in-production-12345"
+REGISTRATION_TOKEN="36951f8e0fc96c82b86f01e82c4c347d"
+
+========================================
+SAMPAI SINI
+========================================
+
+JANGAN LUPA:
+- Ganti [PASSWORD_BARU] dengan password database Anda
+- Ganti [SERVICE_ROLE_KEY] dengan service_role key dari Supabase
+- Tidak ada tanda kurung [ ] di password atau key
+- Save file .env setelah edit
+
+SETELAH SAVE, JALANKAN:
+npm run db:test
+
+JIKA BERHASIL, LANJUTKAN:
+npx prisma generate
+npx prisma db push
+npm run db:seed
+npm run dev

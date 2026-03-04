@@ -122,18 +122,21 @@ export default function SecretRegisterPage() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Role</label>
-              <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-md">
-                <input
-                  type="radio"
-                  name="role"
-                  value="ADMIN"
-                  defaultChecked
-                  disabled
-                  className="w-4 h-4"
-                />
-                <span className="font-medium">Admin</span>
-              </div>
+              <label htmlFor="role" className="text-sm font-medium">
+                Role
+              </label>
+              <select
+                id="role"
+                name="role"
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">Pilih Role</option>
+                <option value="CEO">CEO - Chief Executive Officer</option>
+                <option value="MANAGER">Manager</option>
+                <option value="SEKRETARIS">Sekretaris</option>
+                <option value="BENDAHARA">Bendahara</option>
+              </select>
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
