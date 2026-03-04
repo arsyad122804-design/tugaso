@@ -3,6 +3,7 @@ import { verifySession } from '@/lib/session'
 import { logoutAction } from '@/app/actions/auth-actions'
 import prisma from '@/lib/prisma'
 import Image from 'next/image'
+import AIAssistant from '@/components/AIAssistant'
 
 export default async function DashboardLayout({
   children,
@@ -152,6 +153,7 @@ export default async function DashboardLayout({
         </aside>
         <main className="flex-1 overflow-auto">{children}</main>
       </div>
+      <AIAssistant />
     </div>
   )
 }
