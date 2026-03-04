@@ -176,7 +176,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {news.map((item, idx) => (
+              {news.map((item: any, idx: number) => (
                 <div key={idx} className="pb-3 border-b last:border-0 hover:bg-gray-50 p-2 rounded transition-colors cursor-pointer">
                   <p className="text-sm font-medium text-gray-800">{item.title}</p>
                   <p className="text-xs text-gray-500 mt-1">{item.time}</p>

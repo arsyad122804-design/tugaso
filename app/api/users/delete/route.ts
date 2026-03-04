@@ -11,7 +11,7 @@ export async function DELETE(request: Request) {
   try {
     // Verify admin session
     const session = await verifySession()
-    if (!session || session.role !== 'ADMIN') {
+    if (!session || (session.role !== 'CEO' && session.role !== 'MANAGER')) {
       return NextResponse.json(
         { success: false, message: 'Unauthorized' },
         { status: 401 }

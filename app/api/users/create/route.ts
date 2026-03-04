@@ -7,14 +7,14 @@ import { z } from 'zod'
 const CreateUserSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
-  role: z.enum(['ADMIN', 'USER']),
+  role: z.enum(['CEO', 'MANAGER', 'SEKRETARIS', 'BENDAHARA']),
 })
 
 export async function POST(request: Request) {
   try {
     // Verify admin session
     const session = await verifySession()
-    if (!session || session.role !== 'ADMIN') {
+    if (!session || (session.role !== 'CEO' && session.role !== 'MANAGER')) {
       return NextResponse.json(
         { success: false, message: 'Unauthorized' },
         { status: 401 }
