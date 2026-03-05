@@ -1,0 +1,181 @@
+═══════════════════════════════════════════════════════════════
+   🔧 CARA FIX ERROR VERCEL - LANGKAH SUPER MUDAH
+═══════════════════════════════════════════════════════════════
+
+MASALAH: Aplikasi tidak bisa dibuka (ERR_FAILED)
+PENYEBAB: Environment variables belum diset di Vercel
+SOLUSI: Ikuti 5 langkah di bawah ini (5 menit selesai!)
+
+═══════════════════════════════════════════════════════════════
+
+📍 LANGKAH 1: BUKA VERCEL DASHBOARD
+───────────────────────────────────────────────────────────────
+1. Buka browser
+2. Ketik: vercel.com/dashboard
+3. Login dengan GitHub
+4. Klik project "tugaso"
+
+═══════════════════════════════════════════════════════════════
+
+📍 LANGKAH 2: MASUK KE SETTINGS
+───────────────────────────────────────────────────────────────
+1. Klik tab "Settings" (di menu atas)
+2. Klik "Environment Variables" (di sidebar kiri)
+3. Anda akan lihat halaman untuk tambah variables
+
+═══════════════════════════════════════════════════════════════
+
+📍 LANGKAH 3: BUKA FILE .ENV DI KOMPUTER
+───────────────────────────────────────────────────────────────
+1. Buka VS Code atau editor Anda
+2. Buka file ".env" di folder project
+3. Siapkan untuk copy-paste
+
+═══════════════════════════════════════════════════════════════
+
+📍 LANGKAH 4: TAMBAHKAN 9 VARIABLES
+───────────────────────────────────────────────────────────────
+
+Untuk setiap variable di bawah:
+- Klik tombol "Add New" di Vercel
+- Isi Key dan Value
+- Centang: Production, Preview, Development
+- Klik "Save"
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 1                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   DATABASE_URL                                         │
+│ Value: (Copy dari .env, baris DATABASE_URL=...)            │
+│ Env:   ✅ Production ✅ Preview ✅ Development              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 2                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   DIRECT_URL                                           │
+│ Value: (Copy dari .env, baris DIRECT_URL=...)              │
+│ Env:   ✅ Production ✅ Preview ✅ Development              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 3                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   NEXT_PUBLIC_SUPABASE_URL                             │
+│ Value: (Copy dari .env, baris NEXT_PUBLIC_SUPABASE_URL=...)│
+│ Env:   ✅ Production ✅ Preview ✅ Development              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 4                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   NEXT_PUBLIC_SUPABASE_ANON_KEY                        │
+│ Value: (Copy dari .env, baris NEXT_PUBLIC_SUPABASE_ANON...│
+│ Env:   ✅ Production ✅ Preview ✅ Development              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 5                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   SUPABASE_SERVICE_ROLE_KEY                            │
+│ Value: (Copy dari .env, baris SUPABASE_SERVICE_ROLE_KEY...)│
+│ Env:   ✅ Production ✅ Preview ✅ Development              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 6                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   SESSION_SECRET                                       │
+│ Value: my-super-secret-key-change-this-in-production-12345 │
+│ Env:   ✅ Production ✅ Preview ✅ Development              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 7                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   REGISTRATION_TOKEN                                   │
+│ Value: 36951f8e0fc96c82b86f01e82c4c347d                     │
+│ Env:   ✅ Production ✅ Preview ✅ Development              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 8                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   GROQ_API_KEY                                         │
+│ Value: (Copy dari .env, baris GROQ_API_KEY=...)            │
+│ Env:   ✅ Production ✅ Preview ✅ Development              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ VARIABLE 9                                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Key:   NODE_ENV                                             │
+│ Value: production                                           │
+│ Env:   ✅ Production (HANYA INI SAJA!)                      │
+└─────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════
+
+📍 LANGKAH 5: REDEPLOY APLIKASI
+───────────────────────────────────────────────────────────────
+1. Klik tab "Deployments" (menu atas)
+2. Cari deployment paling atas (yang terbaru)
+3. Klik tombol "..." (titik tiga) di sebelah kanan
+4. Pilih "Redeploy"
+5. Klik "Redeploy" lagi untuk konfirmasi
+6. Tunggu 2-3 menit sampai status "Ready"
+7. Klik "Visit" untuk buka aplikasi
+
+═══════════════════════════════════════════════════════════════
+
+✅ SELESAI!
+───────────────────────────────────────────────────────────────
+Aplikasi sekarang sudah bisa diakses tanpa error!
+
+Fitur yang berfungsi:
+✅ Login & Register (tema Ramadhan)
+✅ Dashboard PT Sumber Rezeki
+✅ Menu Perusahaan (8 submenu)
+✅ Portfolio saham
+✅ Saham real-time
+✅ AI Assistant
+✅ User Management
+✅ Profile dengan upload foto
+
+═══════════════════════════════════════════════════════════════
+
+🆘 TROUBLESHOOTING
+───────────────────────────────────────────────────────────────
+
+Jika masih error setelah redeploy:
+
+1. CEK JUMLAH VARIABLES
+   → Harus ada 9 variables
+   → Jika kurang, tambahkan yang hilang
+
+2. CEK TYPO
+   → Key harus persis sama (case-sensitive)
+   → Value tidak boleh ada spasi di awal/akhir
+
+3. CEK ENVIRONMENT
+   → Variable 1-8: Production, Preview, Development
+   → Variable 9 (NODE_ENV): Production saja
+
+4. REDEPLOY LAGI
+   → Kadang perlu redeploy 2x
+
+5. CEK BUILD LOGS
+   → Tab Deployments → Klik deployment
+   → Scroll ke bawah, lihat error message
+   → Screenshot dan tanyakan
+
+═══════════════════════════════════════════════════════════════
+
+💡 TIPS
+───────────────────────────────────────────────────────────────
+- Copy-paste value dari .env untuk menghindari typo
+- Jangan tambahkan tanda kutip di value
+- Pastikan tidak ada spasi di awal atau akhir value
+- Setelah save, tunggu beberapa detik sebelum redeploy
+
+═══════════════════════════════════════════════════════════════
