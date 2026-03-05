@@ -177,6 +177,7 @@ export default async function DashboardLayout({
           window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
+            console.log('PWA install prompt ready');
             if (installButton) {
               installButton.style.display = 'flex';
             }
@@ -185,7 +186,7 @@ export default async function DashboardLayout({
           if (installButton) {
             installButton.addEventListener('click', async () => {
               if (!deferredPrompt) {
-                alert('Aplikasi sudah terinstall atau browser tidak support PWA');
+                alert('⚠️ PWA belum siap untuk diinstall\\n\\nKemungkinan penyebab:\\n1. Icon PNG (192x192 & 512x512) belum ada di folder public/\\n2. Aplikasi sudah terinstall\\n3. Browser tidak support PWA\\n\\nSolusi: Baca file CARA_INSTALL_PWA.md untuk panduan lengkap');
                 return;
               }
               
@@ -194,6 +195,9 @@ export default async function DashboardLayout({
               
               if (outcome === 'accepted') {
                 console.log('User accepted the install prompt');
+                alert('✅ Aplikasi berhasil diinstall!');
+              } else {
+                console.log('User dismissed the install prompt');
               }
               
               deferredPrompt = null;
@@ -205,7 +209,16 @@ export default async function DashboardLayout({
             if (installButton) {
               installButton.style.display = 'none';
             }
+            alert('🎉 Aplikasi PT Sumber Rezeki berhasil diinstall!\\nCek home screen Anda.');
           });
+          
+          // Check if already installed
+          if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('App is running in standalone mode');
+            if (installButton) {
+              installButton.style.display = 'none';
+            }
+          }
         `
       }} />
     </div>
