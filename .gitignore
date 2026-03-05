@@ -28,6 +28,9 @@ yarn-error.log*
 # local env files
 .env
 .env*.local
+VERCEL_ENV_VARIABLES.txt
+CARA_INSTALL_PWA.md
+generate-icon.html
 
 # vercel
 .vercel
