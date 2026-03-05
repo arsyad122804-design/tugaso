@@ -14,11 +14,14 @@ export async function POST(request: Request) {
     const apiKey = process.env.GROQ_API_KEY
 
     if (!apiKey) {
+      console.error('GROQ_API_KEY not found in environment variables')
       return NextResponse.json(
-        { error: 'API key not configured' },
+        { error: 'AI service not configured. Please contact administrator.' },
         { status: 500 }
       )
     }
+
+    console.log('Sending request to Groq API...')
 
     // Call Groq API
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -125,23 +128,27 @@ Jawab pertanyaan user dengan data di atas. Berikan informasi yang akurat, spesif
       }),
     })
 
+    console.log('Groq API response status:', response.status)
+
     if (!response.ok) {
-      const error = await response.text()
-      console.error('Groq API error:', error)
+      const errorText = await response.text()
+      console.error('Groq API error response:', errorText)
       return NextResponse.json(
-        { error: 'Failed to get AI response' },
+        { error: `AI service error: ${response.status}` },
         { status: 500 }
       )
     }
 
     const data = await response.json()
+    console.log('Groq API success')
+    
     const aiMessage = data.choices[0]?.message?.content || 'Maaf, saya tidak bisa memproses permintaan Anda.'
 
     return NextResponse.json({ message: aiMessage })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Chat API error:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: error.message || 'Internal server error' },
       { status: 500 }
     )
   }

@@ -4,6 +4,7 @@ import { logoutAction } from '@/app/actions/auth-actions'
 import prisma from '@/lib/prisma'
 import Image from 'next/image'
 import AIAssistant from '@/components/AIAssistant'
+import InstallPWA from '@/components/InstallPWA'
 
 export default async function DashboardLayout({
   children,
@@ -70,7 +71,7 @@ export default async function DashboardLayout({
       </nav>
       <div className="flex h-[calc(100vh-4rem)]">
         <aside className="w-64 bg-white border-r shadow-sm overflow-y-auto">
-          <nav className="p-4 space-y-2">
+          <nav className="p-4 space-y-2 pb-24">
             <a
               href="/dashboard"
               className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
@@ -150,10 +151,63 @@ export default async function DashboardLayout({
               </a>
             )}
           </nav>
+
+          {/* Download Button - Fixed at Bottom */}
+          <div className="fixed bottom-0 w-64 bg-white border-t border-r p-4">
+            <button
+              id="installButton"
+              className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              <span className="font-semibold">Download Aplikasi</span>
+            </button>
+            <p className="text-xs text-center text-gray-500 mt-2">Install untuk akses lebih cepat</p>
+          </div>
         </aside>
         <main className="flex-1 overflow-auto">{children}</main>
       </div>
       <AIAssistant />
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          let deferredPrompt;
+          const installButton = document.getElementById('installButton');
+          
+          window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installButton) {
+              installButton.style.display = 'flex';
+            }
+          });
+          
+          if (installButton) {
+            installButton.addEventListener('click', async () => {
+              if (!deferredPrompt) {
+                alert('Aplikasi sudah terinstall atau browser tidak support PWA');
+                return;
+              }
+              
+              deferredPrompt.prompt();
+              const { outcome } = await deferredPrompt.userChoice;
+              
+              if (outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+              }
+              
+              deferredPrompt = null;
+            });
+          }
+          
+          window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            if (installButton) {
+              installButton.style.display = 'none';
+            }
+          });
+        `
+      }} />
     </div>
   )
 }

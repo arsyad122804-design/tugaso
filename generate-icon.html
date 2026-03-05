@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate PWA Icons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    canvas {
+      border: 2px solid #ddd;
+      margin: 20px 0;
+      display: block;
+    }
+    button {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 5px;
+    }
+    button:hover {
+      background: #2563EB;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #666;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 Generate PWA Icons - PT Sumber Rezeki</h1>
+    <p>Klik tombol di bawah untuk generate dan download icon PWA:</p>
+    
+    <h3>Icon 192x192</h3>
+    <canvas id="canvas192" width="192" height="192"></canvas>
+    <button onclick="downloadIcon(192)">Download icon-192.png</button>
+    
+    <h3>Icon 512x512</h3>
+    <canvas id="canvas512" width="512" height="512"></canvas>
+    <button onclick="downloadIcon(512)">Download icon-512.png</button>
+    
+    <hr style="margin: 30px 0;">
+    <p><strong>Langkah selanjutnya:</strong></p>
+    <ol>
+      <li>Download kedua icon (192x192 dan 512x512)</li>
+      <li>Letakkan file di folder <code>public/</code></li>
+      <li>Deploy ulang aplikasi</li>
+      <li>Buka di browser mobile dan klik "Download Aplikasi"</li>
+    </ol>
+  </div>
+
+  <script>
+    function drawIcon(size) {
+      const canvas = document.getElementById(`canvas${size}`)
+      const ctx = canvas.getContext('2d')
+      
+      // Background gradient
+      const gradient = ctx.createLinearGradient(0, 0, size, size)
+      gradient.addColorStop(0, '#3B82F6')
+      gradient.addColorStop(1, '#2563EB')
+      ctx.fillStyle = gradient
+      ctx.fillRect(0, 0, size, size)
+      
+      // Add subtle pattern
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
+      for (let i = 0; i < size; i += 20) {
+        ctx.fillRect(i, 0, 1, size)
+        ctx.fillRect(0, i, size, 1)
+      }
+      
+      // Text "SR"
+      ctx.fillStyle = 'white'
+      ctx.font = `bold ${size * 0.4}px Arial`
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.fillText('SR', size / 2, size / 2)
+      
+      // Subtitle
+      ctx.font = `${size * 0.08}px Arial`
+      ctx.fillText('Sumber Rezeki', size / 2, size * 0.75)
+    }
+    
+    function downloadIcon(size) {
+      const canvas = document.getElementById(`canvas${size}`)
+      const link = document.createElement('a')
+      link.download = `icon-${size}.png`
+      link.href = canvas.toDataURL('image/png')
+      link.click()
+    }
+    
+    // Draw icons on load
+    drawIcon(192)
+    drawIcon(512)
+  </script>
+</body>
+</html>

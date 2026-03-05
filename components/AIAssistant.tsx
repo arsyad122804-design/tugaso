@@ -39,10 +39,13 @@ export default function AIAssistant() {
       if (response.ok) {
         setMessages(prev => [...prev, { role: 'assistant', content: data.message }])
       } else {
-        setMessages(prev => [...prev, { role: 'assistant', content: 'Maaf, terjadi kesalahan. Silakan coba lagi.' }])
+        const errorMsg = data.error || 'Maaf, terjadi kesalahan. Silakan coba lagi.'
+        console.error('API Error:', data)
+        setMessages(prev => [...prev, { role: 'assistant', content: `❌ ${errorMsg}` }])
       }
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Maaf, terjadi kesalahan koneksi.' }])
+      console.error('Fetch error:', error)
+      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Maaf, terjadi kesalahan koneksi. Pastikan Anda terhubung ke internet.' }])
     } finally {
       setIsLoading(false)
     }
